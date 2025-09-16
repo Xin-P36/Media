@@ -1,0 +1,28 @@
+server:
+  port: 8080 # <<< 端口号
+
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC # 指定 SQLite 的 JDBC 驱动类
+    url: jdbc:sqlite:media_manager.db # 这里 "media_manager.db" 表示在项目根目录下创建一个名为 media_manager.db 的文件
+    username:  # SQLite 不需要用户名和密码，可以留空
+    password:
+  sql:
+    init:
+      mode: never # 禁止SpringBoot初始化数据库
+
+# --- MyBatis-Plus 配置 ---
+mybatis-plus:
+  type-aliases-package: org.xinp.entity #  指定实体类所在的包，MyBatis-Plus 会自动扫描
+  mapper-locations: classpath:/mapper/*.xml  # 配置 Mapper.xml 文件的位置 (即使你主要用注解，也建议配置上)
+  global-config:
+    db-config:
+      id-type: auto # 主键策略：自增 (SQLite 的 AUTOINCREMENT)
+      db-type: sqlite
+  configuration:
+    map-underscore-to-camel-case: true  # 推荐开启，自动将数据库的下划线命名 (e.g., file_name) 映射到 Java 的驼峰命名 (e.g., fileName)
+
+# 使用环境
+media:
+  system: linux # 使用的系统环境，可选值：linux, windows
+  secret-string: wWxnuQ34fu9szWL02BIJEishzlvEU2dG # 密钥字符串，用于加密解密
