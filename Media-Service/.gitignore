@@ -1,0 +1,11 @@
+target/
+.idea/
+*.iml
+.env
+.env.local
+media_manager.db
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+/data/
